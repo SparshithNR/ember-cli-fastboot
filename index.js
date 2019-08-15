@@ -70,7 +70,7 @@ module.exports = {
 
     // set autoRun to false since we will conditionally include creating app when app files
     // is eval'd in app-boot
-    app.options.autoRun = false;
+    // app.options.autoRun = false;
 
     app.import('vendor/experimental-render-mode-rehydrate.js');
 
@@ -333,7 +333,10 @@ module.exports = {
           }
 
           let fastbootMiddleware = FastBootExpressMiddleware({
-            fastboot: this.fastboot
+            fastboot: this.fastboot,
+            sandboxGlobals: {
+              EMBER_DISABLE_AUTO_BOOT: true;
+            }
           });
 
           fastbootMiddleware(req, resp, next);
